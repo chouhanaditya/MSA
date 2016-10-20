@@ -37,16 +37,17 @@ class TeamController extends Controller
     {
 //        $schools = School::lists('school_name','id');
 //        $users = User::where('role', 'Coach')->lists('name','id');
+        if (Auth::check()) {
+            $schools = School::whereNotIn('id', function ($a) {
+                $a->select('school_id')->from('teams');
+            })->lists('school_name', 'id');
 
-        $schools = School::whereNotIn('id',function ($a) {
-        $a->select('school_id')->from('teams');
-        })->lists('school_name','id');
+            $users = User::where('role', 'Coach')->whereNotIn('id', function ($b) {
+                $b->select('user_id')->from('teams');
+            })->lists('name', 'id');
 
-        $users = User::where('role', 'Coach')->whereNotIn('id',function ($b){
-            $b->select('user_id')->from('teams');
-        })->lists('name','id');
-
-        return view('team.create', compact('schools','users'));
+            return view('team.create', compact('schools', 'users'));
+        }
     }
     /**
      * Store a newly created resource in storage.

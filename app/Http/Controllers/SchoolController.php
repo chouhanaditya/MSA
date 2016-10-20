@@ -42,7 +42,10 @@ class SchoolController extends Controller
 
     public function create()
     {
-        return view('school.create');
+        if (Auth::check()) {
+            return view('school.create');
+        }
+
     }
 
     /**

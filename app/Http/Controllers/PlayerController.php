@@ -37,13 +37,29 @@ class PlayerController extends Controller
 
     public function create()
     {
-        $email=Auth::user()->email;
-        $user = User::where('email', $email)->first();
-        $user_id=$user->id;
+        try {
+            if (Auth::check()) {
+                $email = Auth::user()->email;
+                $user = User::where('email', $email)->first();
+                $user_id = $user->id;
 
-        $team = Team::where('user_id', $user_id)->lists('team_name','id');
-        return view('player.create',compact('team'));
-    }
+                $team = Team::where('user_id', $user_id)->lists('team_name', 'id');
+                return view('player.create', compact('team'));
+
+            }
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            if (strpos($e,'Integrity constraint violation') !== false) {
+            $message='This email id is registered with MSA. Please try another one.';
+            }
+            else {
+                $message='Somethong went wrong.Please try again.';
+            }
+            return view('player.error',compact('message'));
+            }
+
+}
 
     /**
      * Store a newly created resource in storage.
