@@ -36,15 +36,15 @@ class TeamController extends Controller
     public function create()
     {
 //        $schools = School::lists('school_name','id');
-//        $users = User::where('role', 'coach')->lists('name','id');
+        $users = User::where('role', 'coach')->lists('name','id');
 
         $schools = School::whereNotIn('id',function ($a) {
         $a->select('school_id')->from('teams');
         })->lists('school_name','id');
 
-        $users = User::where('role', 'coach')->whereNotIn('id',function ($b){
-            $b->select('user_id')->from('teams');
-        })->lists('name','id');
+        //$users = User::where('role', 'coach')->whereNotIn('id',function ($b){
+         //   $b->select('user_id')->from('teams');
+        //})->lists('name','id');
 
         return view('team.create', compact('schools','users'));
     }
