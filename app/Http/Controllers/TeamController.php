@@ -39,7 +39,7 @@ class TeamController extends Controller
 //        $users = User::where('role', 'coach')->lists('name','id');
 
         $schools = School::whereNotIN('id',function ($a) {
-        $a->select('school_id')->from('tems');
+        $a->select('school_id')->from('teams');
         })->lists('school_name','id');
 
         $users = User::where('role', 'coach')->whereNotIN('id',function ($b){
