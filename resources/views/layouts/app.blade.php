@@ -23,6 +23,35 @@
         .fa-btn {
             margin-right: 6px;
         }
+        #outer-div {
+            text-align: center;
+            background-color: lightgray;
+            width: 30%;
+            height: auto;
+            border: 1px solid black;
+            padding: 10px;
+        }
+        #inner-div {            
+            background-color: lightgray;
+            width: 90%;
+            height: auto;
+            border: 1px dashed black;
+            padding: 10px;
+            margin: 20px;
+        }
+        .right {
+            position: absolute;
+            right: 20px; 
+            overflow-y:scroll; 
+            height: 50%;          
+        }
+        .left {
+            position: absolute;
+            left: 20px;    
+        }
+        .center {
+            margin: auto;
+        }
     </style>
 </head>
 <body id="app-layout">
@@ -49,10 +78,9 @@
                 <a href="{{ action('SchoolController@index') }}">Schools</a> &nbsp;| &nbsp;
                 <a href="{{ action('TeamController@index') }}">Teams</a> &nbsp;|&nbsp;
                 <a href="{{ action('PlayerController@index') }}">Players</a> &nbsp;|&nbsp;
-                <a>Fields</a>&nbsp;|&nbsp;
-                &nbsp;
-                <a>Matches</a>&nbsp;|&nbsp;
-                <a>Tournaments</a>
+                <a href="{{ action('FieldController@index') }}">Fields</a>&nbsp;|&nbsp;                &nbsp;
+                <a href="{{ action('MatchController@index') }}">Matches</a>&nbsp;|&nbsp;
+                <a href="{{ action('TournamentController@index') }}">Tournaments</a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -75,9 +103,14 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                {{--<li><a href="{{ url('/password/reset') }}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>--}}
                             </ul>
                         </li>
+
                     @endif
+                    <!-- <li> 
+                    {!! Form::label('date_created',Carbon\Carbon::today()->toDateString()) !!}
+                    </li> -->
                 </ul>
             </div>
         </div>

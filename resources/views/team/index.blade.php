@@ -9,26 +9,27 @@
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr class="bg-info">
-            <th>School Name</th>
+
             <th>Team Name</th>
+            <th>School Name</th>
             <th>Coach Name</th>
             <th>Coach Mobile</th>
             <th>Matches Won</th>
             <th>Matches Lost</th>
-            <th colspan="3"></th>
+            <th colspan="2"></th>
         </tr>
         </thead>
         <tbody>
         @foreach ($teams as $team)
             <tr>
+
+                <td><a href="{{url('team',$team->id)}}">{{ $team->team_name }}</a></td>
                 <td>{{ $team->school->school_name }}</td>
-                <td>{{ $team->team_name }}</td>
                 <td>{{ $team->user->name }}</td>
                 <td>{{ $team->coach_mobile }}</td>
                 <td>{{ $team->matches_won }}</td>
                 <td>{{ $team->matches_lost }}</td>
 
-                <td><a href="{{url('team',$team->id)}}" class="btn btn-primary">View Details</a></td>
                 @if ((Auth::check())&&($role=='Official'))
                 <td><a href="{{route('team.edit',$team->id)}}" class="btn btn-warning">Update Details</a></td>
                 <td>

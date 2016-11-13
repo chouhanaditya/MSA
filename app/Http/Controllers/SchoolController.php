@@ -39,7 +39,6 @@ class SchoolController extends Controller
         return view('school.show',compact('school'));
     }
 
-
     public function create()
     {
         if (Auth::check()) {
@@ -48,11 +47,6 @@ class SchoolController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
     public function store(Request $request)
     {
         try {
@@ -102,7 +96,7 @@ class SchoolController extends Controller
         $school=School::find($id);
         $school->update($request->all());
         return redirect('school');
-    } catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             if (strpos($e, 'Integrity constraint violation') !== false) {
                 $message = 'This email id is registered with MSA. Please try another one.';
             } else {
@@ -117,15 +111,20 @@ class SchoolController extends Controller
         try {
 
             $team_id=Team::where('school_id', $id)->lists('id');
-            $players=Player::where('team_id', $team_id)->lists('id');
 
-            //Deleting all players of that team associated with this school.
-            foreach ($players as $player)
-            {
-                Player::find($player)->delete();
+            if(!$team_id) {
+                $players = Player::where('team_id', $team_id)->lists('id');
+
+                if(!$players) {
+
+                    //Deleting all players of that team associated with this school.
+                    foreach ($players as $player) {
+                        Player::find($player)->delete();
+                    }
+                }
+                //Deleting team associated with this school.
+                Team::find($team_id)->delete();
             }
-            //Deleting team associated with this school.
-            Team::find($team_id)->delete();
 
             //Deleting that school
             School::find($id)->delete();
@@ -135,17 +134,14 @@ class SchoolController extends Controller
         } catch (\Illuminate\Database\QueryException $e)
         {
             $message='Somethong went wrong.Please try again.';
+            $message=$e->getMessage();
             return view('school.error',compact('message'));
         }
-
-
     }
 
     public function stringify($id)
     {
-
         $school = School::where('id', $id)->select('school_name','school_email','school_address','school_city','school_state','school_zipcode','school_contactno')->first();
-
         $school = $school->toArray();
         return response()->json($school);
     }

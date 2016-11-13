@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
+    <div align="center">
     <h3><?php echo ($team['team_name']); ?> Details </h3>
+        </div>
     <div class="container">
         <table class="table table-striped table-bordered table-hover">
             <tbody>

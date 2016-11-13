@@ -24,7 +24,7 @@
 
     <div class="form-group">
         {!! Form::label('team_name', 'Team Name:') !!}
-        {!! Form::text('team_name',null,['class'=>'form-control']) !!}
+        {!! Form::text('team_name',null,['class'=>'form-inline']) !!}
     </div>
 
     <div class="form-group">

@@ -27,7 +27,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
     public function teams() {
         return $this->hasOne('App\team');
 

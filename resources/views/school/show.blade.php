@@ -1,9 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-	
+    <div align="center">
+        <h3><?php echo ($school['school_name']); ?> Details </h3>
+    </div>
 	<div class="container">	
-	<h3><?php echo ($school['school_name']); ?> Details </h3>
+
 
         <table class="table table-striped table-bordered table-hover">
 			<tbody>

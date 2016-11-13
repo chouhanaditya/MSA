@@ -19,11 +19,10 @@
         <tbody>
         @foreach ($schools as $school)
             <tr>
-                <td>{{ $school->school_name }}</td>
+                <td><a href="{{url('school',$school->id)}}">{{ $school->school_name }}</a></td>
                 <td>{{ $school->school_address }}</td>
                 <td>{{ $school->school_city }}</td>
                 <td>{{ $school->school_state }}</td>
-                <td><a href="{{url('school',$school->id)}}" class="btn btn-primary">View Details</a></td>
                 @if ((Auth::check())&&($role=='Official'))
                     <td><a href="{{route('school.edit',$school->id)}}" class="btn btn-warning">Update Details</a></td>
                     <td>
