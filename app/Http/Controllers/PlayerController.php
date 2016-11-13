@@ -19,24 +19,37 @@ class PlayerController extends Controller
             $email=Auth::user()->email;
             $user = User::where('email', $email)->first();
             $user_role=$user->role;
-            $user_id=$user->id;
-
-            if($user_role=="Coach") {
-                $login_coach_team_id = Team::where('user_id', $user_id)->lists('id');
-                $myPlayers = Player::where('team_id', $login_coach_team_id);
-            }
-            else
-                $myPlayers=null;
-
-        }
-        else
-        {
+         }
+        else       
             $user_role = null;
-            $myPlayers = null;
-        }
 
         $players=Player::all();
-        return view('player.index',compact('players','user_role','myPlayers'));
+        
+        return view('player.index',compact('players','user_role'));
+
+        //   if (Auth::check())
+        // {
+        //     $email=Auth::user()->email;
+        //     $user = User::where('email', $email)->first();
+        //     $user_role=$user->role;
+        //     $user_id=$user->id;
+
+        //     if($user_role=="Coach") {
+        //         $login_coach_team_id = Team::where('user_id', $user_id)->lists('id');
+        //         $myPlayers = Player::where('team_id', $login_coach_team_id);
+        //     }
+        //     else
+        //         $myPlayers=null;
+
+        // }
+        // else
+        // {
+        //     $user_role = null;
+        //     $myPlayers = null;
+        // }
+
+        // $players=Player::all();
+        // return view('player.index',compact('players','user_role','myPlayers'));
     }
 
     public function show($id)
