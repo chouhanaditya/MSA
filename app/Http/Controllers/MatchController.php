@@ -176,7 +176,11 @@ class MatchController extends Controller
 			
             }
             else {		
-                $request['match_half_time']="";			
+                $request['match_half_time']="";	
+                $request['match_end_time']="";                 
+                $request['match_team1_goals']="";             
+                $request['match_team2_goals']=""; 
+
                 $match = new Match($request->all());
                 $match->save();
                 return redirect('match');
