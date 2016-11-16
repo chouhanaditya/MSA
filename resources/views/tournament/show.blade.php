@@ -3,6 +3,7 @@
     <div align="center">
     <h3><?php echo ($tournament['tournament_name']); ?> Details </h3>
     </div>
+    <br>
     <div class="container">
         <table class="table table-striped table-bordered table-hover">
             <tbody>
@@ -31,9 +32,9 @@
                 <td>Participating Teams</td>
                 <td>
                     @foreach ($team_names as $team_name)
-                    <ul>
+                    
                     <?php echo ($team_name); ?>
-                    </ul>
+                    <br>
                     @endforeach
                 </td>
 

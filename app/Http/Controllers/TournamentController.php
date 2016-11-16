@@ -41,6 +41,12 @@ class TournamentController extends Controller
             $tournament_team_names = Team::where('id',$team_id)->lists('team_name') . ",". $tournament_team_names;
         }
         $team_names=explode(",",$tournament_team_names);
+
+        $team_names=str_replace(['"'], '', $team_names);
+        $team_names=str_replace([']'], '', $team_names);  
+        $team_names=str_replace(['['], '', $team_names);
+        $team_names=str_replace(['"'], '', $team_names);  
+
         return view('tournament.show',compact('tournament','team_names'));
     }
     public function create()
