@@ -12,6 +12,7 @@ use App\Field;
 use App\Tournament;
 use Auth;
 use App\Team;
+use Datetime;
 use Carbon\Carbon;
 
 class MatchController extends Controller
@@ -150,24 +151,28 @@ class MatchController extends Controller
             
 		if($request->match_team1_id==null)
             {
-                $match_date=$request->match_date;
-                
+                $match_date=strtotime($request->match_date);
+                $match_date=date('Y-m-d',$match_date);
+                                
 				$tournaments=Tournament::where('id',$request->tournament_id)->lists('tournament_name','id');
+               
                 $fields=Field::lists('field_name','id');
                
-                $users = User::where('role', 'Referee')->whereNotIn('id', function ($b) {
-                $b->select('referee_id')->from('matches')->where('match_date', $match_date);
-                })->lists('name', 'id');
+                // $users = User::where('role', 'Referee')->whereNotIn('id', function ($b) {
+                // $b->select('referee_id')->from('matches')->where('match_date', $match_date);
+                // })->lists('name', 'id');
 
-
+                // $teams = Team::whereNotIn('id', function ($b) {
+                // $b->select('match_team1_id')->from('matches')->where('match_date',$match_date);
+                //     ->select('match_team2_id')->from('matches')->where('match_date',$request->match_date)->get();
+                // // and select('match_team2_id')->from('matches')->where('match_date','$match_date');
+                // })->lists('team_name', 'id');
+                
+                $users = User::where('role', 'Referee')->lists('name', 'id');
 				
-				$teams = Team::whereNotIn('id', function ($b) {
-                $b->select('match_team1_id')->from('matches')->where('match_date',$match_date);
-                    /*->select('match_team2_id')->from('matches')->where('match_date',$request->match_date)->get();*/
-                // and select('match_team2_id')->from('matches')->where('match_date','$match_date');
-				})->lists('team_name', 'id');
+				$teams = Team::lists('team_name', 'id');
 						
-            return view('match.create', compact('teams','tournaments','users','fields'));
+            return view('match.create', compact('teams','tournaments','users','fields','match_date'));
 			
             }
             else {					

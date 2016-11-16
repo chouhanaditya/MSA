@@ -46,6 +46,7 @@
             {!! Form::select('tournament_id', $tournaments) !!}		
 
         </div>
+        {{  $match_date}}
 
 		<div class="form-group">
             {!! Form::label('match_date', 'Match Date:') !!}
