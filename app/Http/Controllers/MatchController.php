@@ -156,18 +156,18 @@ class MatchController extends Controller
                 $fields=Field::lists('field_name','id');
                
                 $users = User::where('role', 'Referee')->whereNotIn('id', function ($b) {
-                $b->select('referee_id')->from('matches')->where('match_date', '$match_date');
+                $b->select('referee_id')->from('matches')->where('match_date', $match_date);
                 })->lists('name', 'id');
 
 
 				
 				$teams = Team::whereNotIn('id', function ($b) {
-                $b->select('match_team1_id')->from('matches')->where('match_date','match_date');
+                $b->select('match_team1_id')->from('matches')->where('match_date',$match_date);
                     /*->select('match_team2_id')->from('matches')->where('match_date',$request->match_date)->get();*/
                 // and select('match_team2_id')->from('matches')->where('match_date','$match_date');
 				})->lists('team_name', 'id');
 						
-            return view('match.create', compact('teams','tournaments','users','fields','match_date'));
+            return view('match.create', compact('teams','tournaments','users','fields'));
 			
             }
             else {					
