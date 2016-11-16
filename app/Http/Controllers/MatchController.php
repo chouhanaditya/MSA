@@ -41,12 +41,12 @@ class MatchController extends Controller
     public function show($id)
     {
         $match = Match::find($id);
+
         $user=User::where('id',$match->referee_id)->first();
         $referee_name=$user->name;
 
         $field=Field::where('id',$match->field_id)->first();
         $field_name=$field->field_name;
-
 
         $playersIds= $match->match_half_time;
         $match_team1_id=$match->match_team1_id;
@@ -176,7 +176,7 @@ class MatchController extends Controller
 				
 				$teams = Team::lists('team_name', 'id');
 						
-            return view('match.create', compact('teams','tournaments','users','fields'));
+            return view('match.create', compact('teams','tournaments','users','fields','match_date'));
 			
             }
             else {		
