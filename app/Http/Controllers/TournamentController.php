@@ -91,6 +91,10 @@ class TournamentController extends Controller
     {
         try
         {
+                $this->validate($request, [
+                'tournament_teams' => 'required',
+            ]);
+
             $tournament_teams="";
 
             foreach($request->tournament_teams as $tournament_team ) {
