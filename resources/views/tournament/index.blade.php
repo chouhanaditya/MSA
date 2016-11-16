@@ -28,12 +28,12 @@
 
                 @if ((Auth::check())&&($role=='Official'))
                     <td><a href="{{route('tournament.edit',$tournament->id)}}" class="btn btn-warning">Update Details</a></td>
-                <td>
+               <!--  <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['tournament.destroy', $tournament->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
-                 @endif
+                -->  @endif
             </tr>
         @endforeach
 
