@@ -175,7 +175,8 @@ class MatchController extends Controller
             return view('match.create', compact('teams','tournaments','users','fields','match_date'));
 			
             }
-            else {					
+            else {		
+                $request['match_half_time']="";			
                 $match = new Match($request->all());
                 $match->save();
                 return redirect('match');

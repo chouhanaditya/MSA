@@ -46,7 +46,6 @@
             {!! Form::select('tournament_id', $tournaments) !!}		
 
         </div>
-        {{  $match_date}}
 
 		<div class="form-group">
             {!! Form::label('match_date', 'Match Date:') !!}
@@ -54,32 +53,36 @@
         </div>
 
 			<div class="form-group">
-				{!! Form::label('match_name', 'Enter Match Name:') !!}
+				{!! Form::label('match_name', 'Enter Match Name:*') !!}
 				{!! Form::text('match_name',null,['class'=>'form-control']) !!}
 			</div>
 	
 			<div class="form-group">
-				{!! Form::label('match_start_time', 'Enter Match Start Time:') !!}
+				{!! Form::label('match_start_time', 'Enter Match Start Time:*') !!}
 				{!! Form::text('match_start_time',null,['class'=>'form-control']) !!}
 			</div>
 			
             <div class="form-group">
-                {!! Form::label('referee_id', 'Select Match Referee:') !!}
+                {!! Form::label('referee_id', 'Select Match Referee:*') !!}
+                <br>
                 {!! Form::select('referee_id', $users) !!}
             </div>
 
             <div class="form-group">
-                {!! Form::label('field_id', 'Select Field:') !!}
+                {!! Form::label('field_id', 'Select Field:*') !!}
+                <br>
                 {!! Form::select('field_id', $fields) !!}
 			</div>
 			
 			<div class="form-group">
-                {!! Form::label('match_team1_id', 'Select team 1:') !!}
+                {!! Form::label('match_team1_id', 'Select team 1:*') !!}
+                <br>
                 {!! Form::select('match_team1_id', $teams) !!}
 			</div>
 			
 			<div class="form-group">
-                {!! Form::label('match_team2_id', 'Select team 2:') !!}
+                {!! Form::label('match_team2_id', 'Select team 2:*') !!}
+                <br>
                 {!! Form::select('match_team2_id', $teams) !!}
 			</div>
 			
