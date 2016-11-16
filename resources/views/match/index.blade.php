@@ -14,7 +14,7 @@
     <br>
 
 <div id="outer-div" class="left">
-<h3> Past Matches </h3>
+<h4> Past Matches </h4>
 
      @foreach ($Prev_matches as $match)
       <div id='inner-div' class='center'>
@@ -26,7 +26,7 @@
 </div>
 
 <div id="outer-div" class="right">
-  <h3>Upcoming Matches </h3>
+  <h4>Upcoming Matches </h4>
   @foreach ($Future_matches as $match)
 
     <div id='inner-div' class='center'>
@@ -38,7 +38,7 @@
 
 <div id="outer-div" class="center">
 
-<h3>     Today's Matches </h3>
+<h4> Today's Matches </h4>
       
 
     @if (count($Today_matches)<=0)
