@@ -44,6 +44,10 @@ class MatchController extends Controller
         $user=User::where('id',$match->referee_id)->first();
         $referee_name=$user->name;
 
+        $field=Field::where('id',$match->field_id)->first();
+        $field_name=$field->field_name;
+
+
         $playersIds= $match->match_half_time;
         $match_team1_id=$match->match_team1_id;
         $match_team2_id=$match->match_team2_id;
@@ -124,7 +128,7 @@ class MatchController extends Controller
                 $Update_flag='false';
         }
 
-       return view('match.show',compact('match','referee_name','Update_flag','players_names_team1','players_flag_team1','players_names_team2','players_flag_team2'));
+       return view('match.show',compact('match','referee_name','field_name','Update_flag','players_names_team1','players_flag_team1','players_names_team2','players_flag_team2'));
     }
 
     public function create()
@@ -172,7 +176,7 @@ class MatchController extends Controller
 				
 				$teams = Team::lists('team_name', 'id');
 						
-            return view('match.create', compact('teams','tournaments','users','fields','match_date'));
+            return view('match.create', compact('teams','tournaments','users','fields'));
 			
             }
             else {		

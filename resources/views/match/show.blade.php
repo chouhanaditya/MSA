@@ -53,7 +53,7 @@
 
             <tr>
                 <td>Played at</td>
-                <td><?php echo ($match['field_id']); ?></td>
+                <td><?php echo ($field_name); ?></td>
             </tr>
                 <tr>
                 <td>Referee Name</td>
