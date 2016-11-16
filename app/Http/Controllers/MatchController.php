@@ -140,7 +140,7 @@ class MatchController extends Controller
 
     public function store(Request $request)
     {
-        try {
+        //try {
 			
 				$this->validate($request, [
                 'tournament_id' => 'required',
@@ -159,7 +159,7 @@ class MatchController extends Controller
                 $b->select('referee_id')->from('matches')->where('match_date', '$match_date');
                 })->lists('name', 'id');
 
-                
+
 				
 				$teams = Team::whereNotIn('id', function ($b) {
                 $b->select('match_team1_id')->from('matches')->where('match_date','match_date');
@@ -176,15 +176,11 @@ class MatchController extends Controller
                 return redirect('match');
             }
 			
-        }catch (\Illuminate\Database\QueryException $e)
-        {
-            if (strpos($e, 'Integrity constraint violation') !== false) {
-                $message = 'This match name is registered with MSA. Please try another one.';
-            } else {
-                $message = 'Somethong went wrong.Please try again.';
-            }
-            return view('match.error',compact('message'));
-        }
+        // }catch (\Illuminate\Database\QueryException $e)
+        // {
+        //     $message = 'Somethong went wrong.Please try again.';
+        //     return view('match.error',compact('message'));
+        // }
     }
 
     public function edit($id)
