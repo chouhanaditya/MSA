@@ -37,6 +37,7 @@ class TournamentController extends Controller
         $tournament_team_names="";
 
         foreach($teamlist as $team_id ) {
+            
             $tournament_team_names = Team::where('id',$team_id)->lists('team_name') . ",". $tournament_team_names;
         }
         $team_names=explode(",",$tournament_team_names);
@@ -83,16 +84,27 @@ class TournamentController extends Controller
     public function edit($id)
     {
         $tournament=Tournament::find($id);
-        return view('tournament.edit',compact('tournament'));
+        $teams = Team::all();
+        return view('tournament.edit',compact('tournament','teams'));
     }
     public function update($id,Request $request)
     {
         try
         {
+            $tournament_teams="";
+
+            foreach($request->tournament_teams as $tournament_team ) {
+                $tournament_teams = $tournament_team . "," . $tournament_teams;
+            }
+
+            $request['tournament_teams']=$tournament_teams;
+ 
+
             $tournament= new Tournament($request->all());
             $tournament=Tournament::find($id);
             $tournament->update($request->all());
             return redirect('tournament');
+
         } catch (\Illuminate\Database\QueryException $e) {
             if (strpos($e, 'Integrity constraint violation') !== false) {
                 $message = 'This email id is registered with MSA. Please try another one.';

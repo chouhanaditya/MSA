@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::auth();
 Route::post('/SecurityQuestions', 'Auth\PasswordController@getSecurityQuestions');
+Route::get('/match/teamSelection', 'MatchController@getTeamSelection');
+Route::post('/match/teamSelected', 'MatchController@postTeamSelection');
 Route::post('/ResetPassword', 'Auth\PasswordController@resetpassword');
 Route::post('/PasswordChanged', 'Auth\PasswordController@changepassword');
 

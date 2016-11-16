@@ -11,11 +11,6 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('match_half_time', 'Match Half Time:') !!}
-        {!! Form::text('match_half_time',null,['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
         {!! Form::label('match_end_time', 'Match End Time:') !!}
         {!! Form::text('match_end_time',null,['class'=>'form-control']) !!}
     </div>

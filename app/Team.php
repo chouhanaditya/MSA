@@ -25,5 +25,9 @@ class team extends Model
         return $this->hasMany('App\Player');
 
     }
+     public function match() {
+        return $this->hasMany('App\Match');
+
+    }
 
 }

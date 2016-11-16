@@ -22,15 +22,17 @@
                 <td><a href="{{url('field',$field->id)}}" >{{ $field->field_name }}</a></td>
                 <td>{{ $field->field_city }}</td>
                 <td>{{ $field->field_owner_name }}</td>
-                <td>{{ $field->field_owner_email }}</td>
 
                 @if ((Auth::check())&&($role=='Official'))
+                    <td>{{ $field->field_owner_email }}</td>
                     <td><a href="{{route('field.edit',$field->id)}}" class="btn btn-warning">Update Details</a></td>
                     <td>
                         {!! Form::open(['method' => 'DELETE', 'route'=>['field.destroy', $field->id]]) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </td>
+                @else
+                    <td colspan="2">{{ $field->field_owner_email }}</td>
                 @endif
             </tr>
         @endforeach

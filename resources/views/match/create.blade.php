@@ -58,7 +58,7 @@
 			</div>
 	
 			<div class="form-group">
-				{!! Form::label('match_start_time', 'Enter Match Time:') !!}
+				{!! Form::label('match_start_time', 'Enter Match Start Time:') !!}
 				{!! Form::text('match_start_time',null,['class'=>'form-control']) !!}
 			</div>
 			

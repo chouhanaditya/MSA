@@ -28,16 +28,18 @@
                 <td>{{ $team->user->name }}</td>
                 <td>{{ $team->coach_mobile }}</td>
                 <td>{{ $team->matches_won }}</td>
-                <td>{{ $team->matches_lost }}</td>
 
                 @if ((Auth::check())&&($role=='Official'))
+                <td>{{ $team->matches_lost }}</td>
                 <td><a href="{{route('team.edit',$team->id)}}" class="btn btn-warning">Update Details</a></td>
                 <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['team.destroy', $team->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
-                 @endif
+                @else
+                    <td colspan="2">{{ $team->matches_lost }}</td>
+                @endif
             </tr>
         @endforeach
 
