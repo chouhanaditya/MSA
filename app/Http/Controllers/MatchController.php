@@ -29,11 +29,11 @@ class MatchController extends Controller
             $role="";
         
 
-        $Prev_matches=Match::where('match_date','<',Carbon::today()->format('Y-m-d'))->get();
+        $Prev_matches=Match::where('match_date','<',Carbon::today()->format('Y-m-d'))->orderBy('match_date','desc')->get();
 
-        $Today_matches= Match::where('match_date','=',Carbon::today()->format('Y-m-d'))->get();
+        $Today_matches= Match::where('match_date','=',Carbon::today()->format('Y-m-d'))->orderBy('match_date','desc')->get();
 
-        $Future_matches=Match::where('match_date','>',Carbon::today()->format('Y-m-d'))->get();
+        $Future_matches=Match::where('match_date','>',Carbon::today()->format('Y-m-d'))->orderBy('match_date','desc')->get();
 
         return view('match.index',compact ('Prev_matches','Today_matches','Future_matches','role'));
     }
@@ -259,7 +259,7 @@ class MatchController extends Controller
             $user_teamname=$user_team->team_name;
             $user_teamId=$user_team->id;
 
-            $user_matches=Match::where('match_team1_id',$user_teamId)->orWhere('match_team2_id',$user_teamId)->get();
+            $user_matches=Match::where('match_team1_id',$user_teamId)->orWhere('match_team2_id',$user_teamId)->orderBy('match_date','desc')->get();
 
             $myplayers=Player::where([['team_id',$user_teamId],['player_eligibility_status','In']])->get();
 
