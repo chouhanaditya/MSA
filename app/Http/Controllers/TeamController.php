@@ -82,8 +82,11 @@ class TeamController extends Controller
 
     public function edit($id)
     {
-        $team=Team::find($id);
-        return view('team.edit',compact('team'));
+        if (Auth::check())
+        {
+            $team=Team::find($id);
+            return view('team.edit',compact('team'));
+        }
     }
 
     /**

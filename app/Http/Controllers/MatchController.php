@@ -199,8 +199,11 @@ class MatchController extends Controller
 
     public function edit($id)
     {
-        $match=Match::find($id);
-        return view('match.edit',compact('match'));
+        if (Auth::check())
+        {
+            $match=Match::find($id);
+            return view('match.edit',compact('match'));
+        }
     }
 
     public function update($id,Request $request)

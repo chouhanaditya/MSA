@@ -117,6 +117,8 @@ class PlayerController extends Controller
 
     public function edit($id)
     {
+        if (Auth::check())
+        {
         $email=Auth::user()->email;
         $coach_id = User::where('email', $email)->lists('id');
         $login_coach_team_name=Team::where('user_id',$coach_id )->lists('team_name');
@@ -131,6 +133,7 @@ class PlayerController extends Controller
             $flag=false;
 
         return view('player.edit',compact('player','flag'));
+    }
     }
 
     /**

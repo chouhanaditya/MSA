@@ -2,9 +2,11 @@
 
 @section('content')
     <h3>Fields</h3>
+    
     @if ((Auth::check())&&($role=='Official'))
         <a href="{{url('/field/create')}}" class="btn btn-success">Add New field</a>
     @endif
+
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>

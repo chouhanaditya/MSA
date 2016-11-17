@@ -41,7 +41,8 @@ class FieldController extends Controller
 
     public function create()
     {
-        if (Auth::check()) {
+        if (Auth::check()) 
+        {
             return view('field.create');
         }
 
@@ -79,8 +80,11 @@ class FieldController extends Controller
 
     public function edit($id)
     {
-        $field=Field::find($id);
-        return view('field.edit',compact('field'));
+        if (Auth::check())
+        {
+            $field=Field::find($id);
+            return view('field.edit',compact('field'));
+        }
     }
 
     /**

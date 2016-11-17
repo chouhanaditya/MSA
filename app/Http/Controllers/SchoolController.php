@@ -78,8 +78,11 @@ class SchoolController extends Controller
 
     public function edit($id)
     {
-        $school=School::find($id);
-        return view('school.edit',compact('school'));
+        if (Auth::check())
+        {
+            $school=School::find($id);
+            return view('school.edit',compact('school'));
+        }
     }
 
     /**

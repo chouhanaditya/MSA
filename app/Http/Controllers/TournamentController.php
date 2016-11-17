@@ -89,9 +89,12 @@ class TournamentController extends Controller
     }
     public function edit($id)
     {
-        $tournament=Tournament::find($id);
-        $teams = Team::all();
-        return view('tournament.edit',compact('tournament','teams'));
+        if (Auth::check())
+        {
+            $tournament=Tournament::find($id);
+            $teams = Team::all();
+            return view('tournament.edit',compact('tournament','teams'));
+        }
     }
     public function update($id,Request $request)
     {
