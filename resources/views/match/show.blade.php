@@ -6,6 +6,8 @@
     @endif
 
     <div align="center">
+    <h3> <?php echo ($tournament_name); ?></h3>
+    <br>
     <h3> <?php echo ($match['match_name']); ?> Details </h3>
     </div>
     <div id="outer-div" class="center">
@@ -33,6 +35,14 @@
             </tr>
             
             <tr>
+                <td>Played at</td>
+                <td><?php echo ($field_name); ?></td>
+            </tr>
+                <tr>
+                <td>Referee Name</td>
+                <td><?php echo ($referee_name); ?></td>
+            </tr>
+                        <tr>
                 <td colspan="2">
                      <h5>Match Date and Timings </h5>
                 </td>
@@ -51,14 +61,6 @@
                 <td><?php echo ($match['match_end_time']); ?></td>
             </tr>
 
-            <tr>
-                <td>Played at</td>
-                <td><?php echo ($field_name); ?></td>
-            </tr>
-                <tr>
-                <td>Referee Name</td>
-                <td><?php echo ($referee_name); ?></td>
-            </tr>
             </tbody>
         </table>
     </div>
