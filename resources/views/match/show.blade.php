@@ -7,7 +7,7 @@
 
     <div align="center">
     <h3> <?php echo ($tournament_name); ?></h3>
-    <br>
+    
     <h3> <?php echo ($match['match_name']); ?> Details </h3>
     </div>
     <div id="outer-div" class="center">
