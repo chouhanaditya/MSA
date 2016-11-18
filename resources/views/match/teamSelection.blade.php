@@ -31,7 +31,7 @@
         <tbody>
         @foreach ($user_matches as $match)
             <tr>
-                <td><input type="radio" name="match_id" value={{ $match->id }} >  {{ $match->match_name }}</td>
+                <td><input type="checkbox" name="match_id" value={{ $match->id }} >  {{ $match->match_name }}</td>
                 <td>{{ $match->match_team1_id }} vs {{ $match->match_team2_id }}</td>
                 <td>{{ $match->match_date }}</td>
                 <td>{{ $match->match_start_time }}</td>                  
