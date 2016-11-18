@@ -14,42 +14,49 @@ class PlayerController extends Controller
 {
     public function index()
     {
+        // if (Auth::check())
+        // {
+        //     $email=Auth::user()->email;
+        //     $user = User::where('email', $email)->first();
+        //     $user_role=$user->role;
+        //  }
+        // else       
+        //     $user_role = null;
+
+        // $players=Player::all();
+        
+        // return view('player.index',compact('players','user_role'));
+
         if (Auth::check())
         {
             $email=Auth::user()->email;
             $user = User::where('email', $email)->first();
             $user_role=$user->role;
-         }
-        else       
+            $user_id=$user->id;
+
+            if($user_role=="Coach") 
+            {
+                $login_coach_team = Team::where('user_id', $user_id)->first();
+                $login_coach_team_id=$login_coach_team->id;
+                $login_coach_team_name=$login_coach_team->team_name;
+
+                $myTeamPlayers = Player::where('team_id', $login_coach_team_id)->orderBy('player_name','asc')->get();
+            }
+            else
+            {
+                $myTeamPlayers=null;
+            }
+
+        }
+        else
+        {
             $user_role = null;
+            $myTeamPlayers = null;
+            $login_coach_team_name=null;
+        }
 
-        $players=Player::all();
-        
-        return view('player.index',compact('players','user_role'));
-
-        //   if (Auth::check())
-        // {
-        //     $email=Auth::user()->email;
-        //     $user = User::where('email', $email)->first();
-        //     $user_role=$user->role;
-        //     $user_id=$user->id;
-
-        //     if($user_role=="Coach") {
-        //         $login_coach_team_id = Team::where('user_id', $user_id)->lists('id');
-        //         $myPlayers = Player::where('team_id', $login_coach_team_id);
-        //     }
-        //     else
-        //         $myPlayers=null;
-
-        // }
-        // else
-        // {
-        //     $user_role = null;
-        //     $myPlayers = null;
-        // }
-
-        // $players=Player::all();
-        // return view('player.index',compact('players','user_role','myPlayers'));
+        $players=Player::orderBy('player_name','asc')->get();
+        return view('player.index',compact('players','login_coach_team_name','myTeamPlayers'));
     }
 
     public function show($id)
