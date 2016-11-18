@@ -3,7 +3,7 @@
     @if ($flag)
     <h3>Update Player Details</h3>
     {!! Form::model($player,['method' => 'PATCH','route'=>['player.update',$player->id]]) !!}
-       <div class="form-group">
+    <div class="form-group">
         {!! Form::label('player_name', 'Player Name:') !!}
         {!! Form::text('player_name',null,['class'=>'form-control']) !!}
     </div>
@@ -28,6 +28,16 @@
         {!! Form::label('player_contactno', 'Player Contact Number:') !!}
         {!! Form::text('player_contactno',null,['class'=>'form-control']) !!}
     </div>
+
+    <div class="form-group">
+        {!! Form::label('player_eligibility_status', 'Player Eligibility Status:') !!}
+        <br>
+        <input type="radio"  name="player_eligibility_status" value="In">  In
+        <br>
+        <input type="radio"  name="player_eligibility_status" value="Out">  Out
+    </div>
+
+    
 
         <div class="form-group">
         {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}

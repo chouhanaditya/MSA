@@ -152,6 +152,7 @@ class PlayerController extends Controller
     public function update($id,Request $request)
     {
         try {
+            
             $player = new Player($request->all());
             $player = Player::find($id);
             $player->update($request->all());
