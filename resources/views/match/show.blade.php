@@ -10,6 +10,8 @@
     
     <h3> <?php echo ($match['match_name']); ?> Details </h3>
     </div>
+
+    <div class="table-responsive">
     <div id="outer-div" class="center">
         <table class="table table-striped table-bordered table-hover">
             <tbody>
@@ -64,6 +66,8 @@
             </tbody>
         </table>
     </div>
+    </div>
+    
 <br>
 <br>
 <div id="outer-div" class="left">

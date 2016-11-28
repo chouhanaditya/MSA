@@ -145,40 +145,37 @@ class MatchController extends Controller
 			$fields=null;
             return view('match.create', compact('teams','tournaments','users','fields'));
         }
+        else
+         return view('auth/login');   
     }
 
     public function store(Request $request)
     {
-        //try {
-			
+        try {
+
 				$this->validate($request, [
                 'tournament_id' => 'required',
-                'match_date' => 'required',
+                'match_date' => 'required|date|date_format:Y-m-d|after:today',
                 ]);
 			
             
 		if($request->match_team1_id==null)
             {
-                $match_date=strtotime($request->match_date);
-                $match_date=date('Y-m-d',$match_date);
+                $match_date=$request->match_date;
                                 
 				$tournaments=Tournament::where('id',$request->tournament_id)->lists('tournament_name','id');
-               
-                $fields=Field::lists('field_name','id');
-               
-                // $users = User::where('role', 'Referee')->whereNotIn('id', function ($b) {
-                // $b->select('referee_id')->from('matches')->where('match_date', $match_date);
-                // })->lists('name', 'id');
 
-                // $teams = Team::whereNotIn('id', function ($b) {
-                // $b->select('match_team1_id')->from('matches')->where('match_date',$match_date);
-                //     ->select('match_team2_id')->from('matches')->where('match_date',$request->match_date)->get();
-                // // and select('match_team2_id')->from('matches')->where('match_date','$match_date');
-                // })->lists('team_name', 'id');
-                
-                $users = User::where('role', 'Referee')->lists('name', 'id');
-				
-				$teams = Team::lists('team_name', 'id');
+                $busyFields=Match::where('match_date',$request->match_date)->lists('field_id');                              
+                $fields=Field::whereNotIn('id',$busyFields)->lists('field_name','id');
+
+                $busyReferees=Match::where('match_date',$request->match_date)->lists('referee_id');               
+                $users = User::where('role','Referee')->whereNotIn('id', $busyReferees)->lists('name', 'id');
+
+                $busyteams1=Match::where('match_date',$request->match_date)->lists('match_team1_id');
+                $busyteams2=Match::where('match_date',$request->match_date)->lists('match_team2_id');
+
+                $busyteams=$busyteams1->merge($busyteams2);				
+				$teams = Team::whereNotIn('id', $busyteams)->lists('team_name', 'id');
 						
             return view('match.create', compact('teams','tournaments','users','fields','match_date'));
 			
@@ -194,11 +191,11 @@ class MatchController extends Controller
                 return redirect('match');
             }
 			
-        // }catch (\Illuminate\Database\QueryException $e)
-        // {
-        //     $message = 'Somethong went wrong.Please try again.';
-        //     return view('match.error',compact('message'));
-        // }
+        }catch (\Illuminate\Database\QueryException $e)
+        {
+            $message = 'Somethong went wrong.Please try again.';
+            return view('match.error',compact('message'));
+        }
     }
 
     public function edit($id)
@@ -208,16 +205,66 @@ class MatchController extends Controller
             $match=Match::find($id);
             return view('match.edit',compact('match'));
         }
+
+        else
+         return view('auth/login');   
     }
 
     public function update($id,Request $request)
     {
         try
         {
+                $this->validate($request, [
+                'match_start_time' => 'required',
+                'match_end_time' => 'required',
+                'match_team1_score' => 'required|numeric',
+                'match_team2_score' => 'required|numeric',
+                'match_team1_goals' => 'required',
+                'match_team2_goals' => 'required',
+                ]);
+        
+
             $match= new Match($request->all());
             $match=Match::find($id);
             $match->update($request->all());
+            
+            $match_team1_id=$match->match_team1_id;
+            $match_team2_id=$match->match_team2_id;
+
+            $team1=Team::where('id',$match_team1_id)->first();
+            $team2=Team::where('id',$match_team2_id)->first();
+            
+            //Updating team stats
+
+            $team1_win_count=$team1->matches_won;
+            $team1_lost_count=$team1->matches_lost;
+
+            $team2_win_count=$team2->matches_won;
+            $team2_lost_count=$team2->matches_lost;
+
+            $match_team1_score=$request->match_team1_score;
+            $match_team2_score=$request->match_team2_score;
+
+            if($match_team1_score>$match_team2_score)
+            {
+               $team1_win_count=$team1_win_count+1;
+               $team2_lost_count=$team2_lost_count+1;
+            }
+
+            if($match_team1_score<$match_team2_score)
+            {                
+               $team2_win_count=$team2_win_count+1;
+               $team1_lost_count=$team1_lost_count+1;
+            }
+
+            Team::where('id',$match_team1_id)->update(['matches_won'=>$team1_win_count]);
+            Team::where('id',$match_team1_id)->update(['matches_lost'=>$team1_lost_count]);
+            
+            Team::where('id',$match_team2_id)->update(['matches_won'=>$team2_win_count]);
+            Team::where('id',$match_team2_id)->update(['matches_lost'=>$team2_lost_count]);
+
             return redirect('match');
+
 
         } catch (\Illuminate\Database\QueryException $e) {
 

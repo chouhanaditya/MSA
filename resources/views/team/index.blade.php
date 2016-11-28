@@ -1,11 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Teams</h3>
+    <div>   
+      <h3 style="text-align: center">Teams</h3> 
+    </div> 
+
     @if ((Auth::check())&&($role=='Official'))
-    <a href="{{url('/team/create')}}" class="btn btn-success">Add New Team</a>
+    <div class="pull-right">
+        <a href="{{url('/team/create')}}" class="btn btn-success">Add New</a>
+    
+    </div>
     @endif
-    <hr>
+    <br>
+    <br>
+    <br>
+
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr class="bg-info">

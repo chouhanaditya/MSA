@@ -45,7 +45,8 @@ class FieldController extends Controller
         {
             return view('field.create');
         }
-
+        else
+         return view('auth/login');   
     }
 
     public function store(Request $request)
@@ -54,12 +55,12 @@ class FieldController extends Controller
             $this->validate($request, [
                 'field_name' => 'required',
                 'field_address' => 'required',
-                'field_city' => 'required',
+                'field_city' => 'required|alpha',
                 'field_state' => 'required',
-                'field_zipcode' => 'required',
+                'field_zipcode' => 'required|digits:5',
                 'field_owner_name' => 'required',
-                'field_owner_email' => 'required',
-                'field_owner_contactno' => 'required',
+                'field_owner_email' => 'required|email',
+                'field_owner_contactno' => 'required|numeric',
             ]);
 
             $field = new Field($request->all());
@@ -85,6 +86,8 @@ class FieldController extends Controller
             $field=Field::find($id);
             return view('field.edit',compact('field'));
         }
+        else
+         return view('auth/login');   
     }
 
     /**
@@ -97,10 +100,22 @@ class FieldController extends Controller
     {
         try
         {
+            $this->validate($request, [
+                'field_name' => 'required',
+                'field_address' => 'required',
+                'field_city' => 'required|alpha',
+                'field_state' => 'required',
+                'field_zipcode' => 'required|digits:5',
+                'field_owner_name' => 'required',
+                'field_owner_email' => 'required|email',
+                'field_owner_contactno' => 'required|numeric',
+            ]);
+
             $field= new Field($request->all());
             $field=Field::find($id);
             $field->update($request->all());
             return redirect('field');
+
         } catch (\Illuminate\Database\QueryException $e) {
             if (strpos($e, 'Integrity constraint violation') !== false) {
                 $message = 'This email id is registered with MSA. Please try another one.';

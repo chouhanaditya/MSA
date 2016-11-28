@@ -2,16 +2,28 @@
 
 @section('content')
 
+    <div>   
+      <h2 style="text-align: center">Match Fixtures</h2> 
+    </div> 
+
     @if ((Auth::check())&&($role=='Official'))
+    <div class="pull-left">
       <a href="{{url('/match/create')}}" class="btn btn-success" style="text-align: right";>Schedule New Match</a>
+    </div>
     @endif
 
     @if ((Auth::check())&&($role=='Coach'))
-      <a href="{{url('/match/teamSelection')}}" class="btn btn-success" style="text-align: right";>Team Selection</a>
+      <div class="pull-left">
+        <a href="{{url('/match/teamSelection')}}" class="btn btn-success" style="text-align: right";>Team Selection</a>
+    </div>  
     @endif
 
-    <h2 style="text-align: center;  margin-top: 20px;">Match Fixtures</h2>
     <br>
+    <br>
+    <br>
+
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
 
 <div id="outer-div" class="left">
 <h4> Past Matches </h4>
@@ -58,6 +70,7 @@
     @endif
 
 </div>
-
+</table>
+</div>
 @endsection
 

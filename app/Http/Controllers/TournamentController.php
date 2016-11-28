@@ -56,14 +56,19 @@ class TournamentController extends Controller
             $teams = Team::all();
             return view('tournament.create', compact('teams'));
         }
+        else
+         return view('auth/login');   
     }
     public function store(Request $request)
     {
         try {
             $this->validate($request, [
                 'tournament_name' => 'required',
-                'tournament_start_date' => 'required',
-                'tournament_end_date' => 'required',
+                'tournament_price_money' => 'required|numeric',
+                'tournament_teams'=>'required',
+                'tournament_sponsers' => 'required',
+                'tournament_start_date' => 'required|date|date_format:Y-m-d|after:today',
+                'tournament_end_date' => 'required|date|date_format:Y-m-d|after:today',
             ]);
 
             $tournament_teams="";
@@ -95,13 +100,20 @@ class TournamentController extends Controller
             $teams = Team::all();
             return view('tournament.edit',compact('tournament','teams'));
         }
+        else
+         return view('auth/login');   
     }
     public function update($id,Request $request)
     {
         try
         {
-                $this->validate($request, [
-                'tournament_teams' => 'required',
+            $this->validate($request, [
+                'tournament_name' => 'required',
+                'tournament_price_money' => 'required|numeric',
+                'tournament_teams'=>'required',
+                'tournament_sponsers' => 'required',
+                'tournament_start_date' => 'required|date|date_format:Y-m-d',
+                'tournament_end_date' => 'required|date|date_format:Y-m-d',
             ]);
 
             $tournament_teams="";

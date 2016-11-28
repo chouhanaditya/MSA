@@ -72,15 +72,17 @@
                     Missouri Soccer Association
                 </a></h4>
 
-            <br>
                 <br>
                 <br>
+                <br>
+                <div >
                 <a href="{{ action('SchoolController@index') }}">Schools</a> &nbsp;| &nbsp;
                 <a href="{{ action('TeamController@index') }}">Teams</a> &nbsp;|&nbsp;
                 <a href="{{ action('PlayerController@index') }}">Players</a> &nbsp;|&nbsp;
                 <a href="{{ action('FieldController@index') }}">Fields</a>&nbsp;|&nbsp;                &nbsp;
                 <a href="{{ action('MatchController@index') }}">Matches</a>&nbsp;|&nbsp;
                 <a href="{{ action('TournamentController@index') }}">Tournaments</a>
+            </div>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -103,7 +105,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                {{--<li><a href="{{ url('/password/reset') }}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>--}}
+                                <li><a href="{{ url('/ChangeProfile') }}"><i class="fa fa-btn fa-sign-out"></i>Edit Profile</a></li>
                             </ul>
                         </li>
 

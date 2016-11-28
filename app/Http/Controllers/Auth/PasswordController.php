@@ -119,4 +119,22 @@ class PasswordController extends Controller
         }
     }
 
+    protected function postChangeProfile(Request $request)
+    {
+         try {
+
+            $user= new User($request->all());
+            $email=Auth::user()->email;
+            $user = User::where('email', $email)->first();
+            $user->update($request->all());
+
+            return view('auth/ProfileChanged');
+        }
+        catch (\Exception $e)
+        {
+            return view ('errors/503');
+
+        }
+    }
+
 }

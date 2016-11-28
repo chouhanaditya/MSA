@@ -3,7 +3,7 @@
     <div align="center">
         <h3><?php echo ($field['field_name']); ?> Details </h3>
         </div>
-	
+	<br>
 	<div class="container">	
 
 

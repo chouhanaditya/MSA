@@ -33,6 +33,7 @@ class SchoolController extends Controller
         return view('school.index',$schools);
 
     }
+
     public function show($id)
     {
         $school = School::findOrFail($id);
@@ -41,9 +42,12 @@ class SchoolController extends Controller
 
     public function create()
     {
-        if (Auth::check()) {
+        if (Auth::check()) 
+        {
             return view('school.create');
         }
+        else
+         return view('auth/login');   
 
     }
 
@@ -52,12 +56,12 @@ class SchoolController extends Controller
         try {
             $this->validate($request, [
                 'school_name' => 'required',
-                'school_email' => 'required',
+                'school_email' => 'required|email',
                 'school_address' => 'required',
-                'school_city' => 'required',
+                'school_city' => 'required|alpha',
                 'school_state' => 'required',
-                'school_zipcode' => 'required',
-                'school_contactno' => 'required',
+                'school_zipcode' => 'required|digits:5',
+                'school_contactno' => 'required|numeric',
             ]);
 
             $school = new School($request->all());
@@ -83,6 +87,8 @@ class SchoolController extends Controller
             $school=School::find($id);
             return view('school.edit',compact('school'));
         }
+        else
+         return view('auth/login');   
     }
 
     /**
@@ -95,10 +101,21 @@ class SchoolController extends Controller
     {
         try
         {
-        $school= new School($request->all());
-        $school=School::find($id);
-        $school->update($request->all());
-        return redirect('school');
+             $this->validate($request, [
+                'school_name' => 'required',
+                'school_email' => 'required|email',
+                'school_address' => 'required',
+                'school_city' => 'required|alpha',
+                'school_state' => 'required',
+                'school_zipcode' => 'required|digits:5',
+                'school_contactno' => 'required|numeric',
+            ]);
+
+            $school= new School($request->all());
+            $school=School::find($id);
+            $school->update($request->all());
+            return redirect('school');
+
         } catch (\Illuminate\Database\QueryException $e) {
             if (strpos($e, 'Integrity constraint violation') !== false) {
                 $message = 'This email id is registered with MSA. Please try another one.';

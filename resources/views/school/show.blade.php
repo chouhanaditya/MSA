@@ -4,6 +4,8 @@
     <div align="center">
         <h3><?php echo ($school['school_name']); ?> Details </h3>
     </div>
+    <br>
+    
 	<div class="container">	
 
 

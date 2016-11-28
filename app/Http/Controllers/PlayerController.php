@@ -14,20 +14,7 @@ class PlayerController extends Controller
 {
     public function index()
     {
-        // if (Auth::check())
-        // {
-        //     $email=Auth::user()->email;
-        //     $user = User::where('email', $email)->first();
-        //     $user_role=$user->role;
-        //  }
-        // else       
-        //     $user_role = null;
-
-        // $players=Player::all();
-        
-        // return view('player.index',compact('players','user_role'));
-
-        if (Auth::check())
+           if (Auth::check())
         {
             $email=Auth::user()->email;
             $user = User::where('email', $email)->first();
@@ -78,6 +65,8 @@ class PlayerController extends Controller
                 return view('player.create', compact('team'));
 
             }
+            else
+             return view('auth/login');   
         }
         catch (\Illuminate\Database\QueryException $e)
         {
@@ -101,8 +90,12 @@ class PlayerController extends Controller
     {
         $this->validate($request, [
             'player_name' => 'required',
-            'player_email' => 'required',
-            'player_contactno' => 'required',
+            'player_email' => 'required|email',
+            'player_address' => 'required',
+            'player_city' => 'required',
+            'player_state' => 'required',
+            'player_zipcode' => 'required|digits:5',
+            'player_contactno' => 'required|numeric',
         ]);
         try {
             $player = new Player($request->all());
@@ -126,21 +119,23 @@ class PlayerController extends Controller
     {
         if (Auth::check())
         {
-        $email=Auth::user()->email;
-        $coach_id = User::where('email', $email)->lists('id');
-        $login_coach_team_name=Team::where('user_id',$coach_id )->lists('team_name');
+            $email=Auth::user()->email;
+            $coach_id = User::where('email', $email)->lists('id');
+            $login_coach_team_name=Team::where('user_id',$coach_id )->lists('team_name');
 
-        $player=Player::find($id);
-        $player_team_name=$player->team->team_name;
+            $player=Player::find($id);
+            $player_team_name=$player->team->team_name;
 
-        if (strpos($login_coach_team_name, $player_team_name) !== false) {
-            $flag=true;
+            if (strpos($login_coach_team_name, $player_team_name) !== false) {
+                $flag=true;
+            }
+            else
+                $flag=false;
+
+            return view('player.edit',compact('player','flag'));
         }
         else
-            $flag=false;
-
-        return view('player.edit',compact('player','flag'));
-    }
+             return view('auth/login');   
     }
 
     /**
@@ -152,6 +147,17 @@ class PlayerController extends Controller
     public function update($id,Request $request)
     {
         try {
+
+             $this->validate($request, [
+            'player_name' => 'required',
+            'player_address' => 'required',
+            'player_city' => 'required',
+            'player_state' => 'required',
+            'player_zipcode' => 'required|digits:5',
+            'player_contactno' => 'required|numeric',
+            'player_eligibility_status' => 'required',
+             
+        ]);
             
             $player = new Player($request->all());
             $player = Player::find($id);

@@ -1,11 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Schools</h3>
+    <div>
+        <h3 style="text-align: center">Schools</h3>
+   </div>
+
     @if ((Auth::check())&&($role=='Official'))
-        <a href="{{url('/school/create')}}" class="btn btn-success">Add New School</a>
+    <div class="pull-right">
+        <a href="{{url('/school/create')}}" class="btn btn-success">Add New </a>
+    
+    </div>
     @endif
-    <hr>
+    
+    <br>
+    <br>
+    <br>    
+
+
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr class="bg-info">
@@ -25,8 +36,8 @@
 
                 @if ((Auth::check())&&($role=='Official'))
                     <td>{{ $school->school_state }}</td>
-                    <td><a href="{{route('school.edit',$school->id)}}" class="btn btn-warning">Update Details</a></td>
-                    <td>
+                    <td style="text-align: right"><a href="{{route('school.edit',$school->id)}}" class="btn btn-warning">Update Details</a></td>
+                    <td style="text-align: right">
                         {!! Form::open(['method' => 'DELETE', 'route'=>['school.destroy', $school->id]]) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}

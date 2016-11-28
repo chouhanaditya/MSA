@@ -35,9 +35,8 @@ class TeamController extends Controller
 
     public function create()
     {
-//        $schools = School::lists('school_name','id');
-//        $users = User::where('role', 'Coach')->lists('name','id');
-        if (Auth::check()) {
+        if (Auth::check()) 
+        {
             $schools = School::whereNotIn('id', function ($a) {
                 $a->select('school_id')->from('teams');
             })->lists('school_name', 'id');
@@ -48,6 +47,8 @@ class TeamController extends Controller
 
             return view('team.create', compact('schools', 'users'));
         }
+        else
+         return view('auth/login');   
     }
     /**
      * Store a newly created resource in storage.
@@ -59,7 +60,7 @@ class TeamController extends Controller
         try {
             $this->validate($request, [
                 'team_name' => 'required',
-                'coach_mobile' => 'required',
+                'coach_mobile' => 'required|numeric',
                 'school_id' => 'required',
                 'user_id' => 'required',
             ]);
@@ -87,6 +88,8 @@ class TeamController extends Controller
             $team=Team::find($id);
             return view('team.edit',compact('team'));
         }
+        else
+         return view('auth/login');   
     }
 
     /**
@@ -99,11 +102,18 @@ class TeamController extends Controller
     {
         try
         {
-        $team= new Team($request->all());
-        $team=Team::find($id);
-        $team->update($request->all());
-        return redirect('team');
-        } catch (\Illuminate\Database\QueryException $e) {
+             $this->validate($request, [
+                'team_name' => 'required',
+                'coach_mobile' => 'required|numeric',
+            ]);
+
+            $team= new Team($request->all());
+            $team=Team::find($id);
+            $team->update($request->all());
+
+            return redirect('team');
+        } 
+        catch (\Illuminate\Database\QueryException $e) {
             if (strpos($e, 'Integrity constraint violation') !== false) {
                 $message = 'This email id is registered with MSA. Please try another one.';
             } else {
