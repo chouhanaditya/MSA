@@ -36,4 +36,4 @@ Route::get('/ChangeProfile', function () {
 
 Route::post('/ProfileChanged', 'Auth\PasswordController@postChangeProfile');
 
-?>
+Route::get('/ChangePassword', 'Auth\PasswordController@passwordChange');

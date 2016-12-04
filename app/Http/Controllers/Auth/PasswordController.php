@@ -136,5 +136,22 @@ class PasswordController extends Controller
 
         }
     }
+    protected function passwordChange()
+    {
+        try {
+
+            $email=Auth::user()->email;
+            $user = User::where('email', $email)->first();
+        
+            return view('auth/passwords/SecurityQuestions', compact('user'));
+        }
+        catch (\Exception $e)
+        {
+            return view ('errors/503');
+
+        }
+
+    }
+    
 
 }

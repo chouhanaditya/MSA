@@ -8,6 +8,7 @@ use App\User;
 use App\Field;
 use Auth;
 use App\Team;
+use App\Match;
 use App\Player;
 use App\Http\Requests;
 
@@ -130,23 +131,21 @@ class FieldController extends Controller
     {
         try {
 
-//            $team_id=Team::where('field_id', $id)->lists('id');
-//            $players=Player::where('team_id', $team_id)->lists('id');
-//
-//            //Deleting all players of that team associated with this field.
-//            foreach ($players as $player)
-//            {
-//                Player::find($player)->delete();
-//            }
-//            //Deleting team associated with this field.
-//            Team::find($team_id)->delete();
-//
-//            //Deleting that field
-//            field::find($id)->delete();
+           $matches=Match::where('field_id', $id)->lists('id');
 
-            return redirect('field');
+           //Deleting all matches associated with this field.
+           foreach ($matches as $match)
+           {
+               Match::find($match)->delete();
+           }
 
-        } catch (\Illuminate\Database\QueryException $e)
+           //Deleting that field
+           Field::find($id)->delete();
+
+        return redirect('field');
+
+        }
+         catch (\Illuminate\Database\QueryException $e)
         {
             $message='Somethong went wrong.Please try again.';
             return view('field.error',compact('message'));

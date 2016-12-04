@@ -23,7 +23,7 @@
             <th>Tournament End Date</th>
             <th> Tournament Sponsers</th>
             @if ((Auth::check())&&($role=='Official'))
-                <th ></th>
+                <th colspan="2" ></th>
             @endif
         </tr>
         </thead>
@@ -37,13 +37,13 @@
 
 
                 @if ((Auth::check())&&($role=='Official'))
-                    <td style="text-align: right"><a href="{{route('tournament.edit',$tournament->id)}}" class="btn btn-warning">Update Details</a></td>
-               <!--  <td>
+                    <td><a href="{{route('tournament.edit',$tournament->id)}}" class="btn btn-warning">Update Details</a></td>
+                <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['tournament.destroy', $tournament->id]]) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                     <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this tournament? This will also delete all the matches of this tournament.')">
                     {!! Form::close() !!}
                 </td>
-                -->  @endif
+                 @endif
             </tr>
         @endforeach
 

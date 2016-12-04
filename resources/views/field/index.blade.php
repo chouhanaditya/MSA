@@ -35,10 +35,11 @@
                     <td>{{ $field->field_owner_email }}</td>
                     <td style="text-align: right"><a href="{{route('field.edit',$field->id)}}" class="btn btn-warning">Update Details</a></td>
                     <td style="text-align: right">
-                        {!! Form::open(['method' => 'DELETE', 'route'=>['field.destroy', $field->id]]) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                         {!! Form::open(['method' => 'DELETE', 'route'=>['field.destroy', $field->id]]) !!}
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this field. This will also delete all the scheduled matches on this field.')">
                         {!! Form::close() !!}
-                    </td>
+                        <input type="hidden" name="field_id" value="<?php echo $field->id; ?>">
+                     </td>
                 @else
                     <td colspan="2">{{ $field->field_owner_email }}</td>
                 @endif

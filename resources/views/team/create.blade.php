@@ -23,12 +23,12 @@
 
        <div class="col-md-6">
           <br> {!! Form::label('school_id', 'School Name:*') !!}
-           {!! Form::select('school_id', $schools) !!}
+           {!! Form::select('school_id', $schools,['class'=>'form-control']) !!}
        </div>
 
     <div class="col-md-6">
         <br>{!! Form::label('user_id', 'Coach Name:*') !!}
-        {!! Form::select('user_id', $users) !!}
+        {!! Form::select('user_id', $users,['class'=>'form-control']) !!}
     </div>
 
     <div class="col-md-6">

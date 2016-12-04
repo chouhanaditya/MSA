@@ -34,7 +34,7 @@
                 <td style="text-align: right"><a href="{{route('player.edit',$player->id)}}" class="btn btn-warning">Update Details</a></td>
                 <td style="text-align: right">
                         {!! Form::open(['method' => 'DELETE', 'route'=>['player.destroy', $player->id]]) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this player?')">
                         {!! Form::close() !!}
                 </td>
             </tr>

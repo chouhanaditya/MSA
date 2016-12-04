@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\User;
 use Auth;
 use App\Team;
+use App\Match;
 
 class TournamentController extends Controller
 {
@@ -143,13 +144,14 @@ class TournamentController extends Controller
     {
         try {
 
-            $players=Player::where('tournament_id', $id)->lists('id');
+            $matches=Match::where('tournament_id', $id)->lists('id');
 
-            //Deleting all players of that tournament.
-            foreach ($players as $player)
+            //Deleting all matches of that tournament.
+            foreach ($matches as $match)
             {
-                Player::find($player)->delete();
+                Match::find($match)->delete();
             }
+            
             //Deleting that tournament.
             Tournament::find($id)->delete();
             return redirect('tournament');

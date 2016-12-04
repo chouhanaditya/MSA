@@ -55,6 +55,7 @@
 
     @if (count($Today_matches)<=0)
 <div>
+<br>
      <marquee> No matches are scheduled for today. </marquee>
 </div>
     @else

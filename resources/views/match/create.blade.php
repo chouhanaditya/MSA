@@ -26,7 +26,7 @@
 
             		<div class="form-group">
                         {!! Form::label('tournament_id', 'Select Tournament*:') !!}
-                        {!! Form::select('tournament_id', $tournaments) !!}
+                        {!! Form::select('tournament_id', $tournaments,['class'=>'form-control']) !!}
                     </div>
 
 
