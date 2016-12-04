@@ -4,7 +4,6 @@
         <h3><?php echo ($field['field_name']); ?> Details </h3>
     </div>
         <h4><marquee>It is going to be sunny today in city!</marquee> </h4>	
-    <br>
     
 	<div class="container">	
 
