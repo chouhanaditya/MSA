@@ -119,6 +119,23 @@ class PasswordController extends Controller
         }
     }
 
+    protected function getChangeProfile()
+    {
+         try {
+
+            $email=Auth::user()->email;
+            $user = User::where('email', $email)->first();
+           
+            return view('/ChangeProfile',compact('user'));
+        }
+        catch (\Exception $e)
+        {
+            return view ('errors/503');
+
+        }
+    }
+
+
     protected function postChangeProfile(Request $request)
     {
          try {
@@ -128,7 +145,7 @@ class PasswordController extends Controller
             $user = User::where('email', $email)->first();
             $user->update($request->all());
 
-            return view('auth/ProfileChanged');
+            return view('ProfileChanged');
         }
         catch (\Exception $e)
         {
@@ -136,6 +153,7 @@ class PasswordController extends Controller
 
         }
     }
+
     protected function passwordChange()
     {
         try {

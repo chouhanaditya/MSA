@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{!! Form::model($user,['method' => 'PATCH','route'=>['/ProfileChanged']]) !!}
+{!! Form::model($user,['method' => 'PATCH','action'=>['auth/PasswordController@postChangeProfile']]) !!}
 {{ csrf_field() }}
 
 <div class="container">
@@ -120,8 +120,6 @@
                             </button>
                         </div>
                     </div>        
-                </div>
-
         </div>
     </div>
 </div>

@@ -20,10 +20,6 @@
             font-family: 'Lato';
         }
 
-        ul#menu li {
-       display:inline;
-}
-
         .fa-btn {
             margin-right: 6px;
         }
@@ -58,9 +54,8 @@
         }
     </style>
 </head>
-
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top" style="background-color: black">
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -73,63 +68,59 @@
                 </button>
 
                 <!-- Branding Image -->
-            
-                <h3><a href="{{ url('/') }}"> Missouri Soccer Association</a></h3>
-                
+                <h4><a class="navbar-brand" href="{{ url('/') }}">
+                    Missouri Soccer Association
+                </a></h4>
+
                 <br>
-
-                  <h4>  <a href="{{ action('SchoolController@index') }}">Schools</a> &nbsp;| &nbsp;
-                   <a href="{{ action('TeamController@index') }}">Teams</a> &nbsp;|&nbsp;
-                   <a href="{{ action('PlayerController@index') }}">Players</a> &nbsp;|&nbsp;
-                   <a href="{{ action('FieldController@index') }}">Fields</a>&nbsp;|&nbsp;
-                   <a href="{{ action('MatchController@index') }}">Matches</a>&nbsp;|&nbsp;
-                   <a href="{{ action('TournamentController@index') }}">Tournaments</a></h4>
-                           
+                <br>
+                <br>
+                <div >
+                <a href="{{ action('SchoolController@index') }}">Schools</a> &nbsp;| &nbsp;
+                <a href="{{ action('TeamController@index') }}">Teams</a> &nbsp;|&nbsp;
+                <a href="{{ action('PlayerController@index') }}">Players</a> &nbsp;|&nbsp;
+                <a href="{{ action('FieldController@index') }}">Fields</a>&nbsp;|&nbsp;                &nbsp;
+                <a href="{{ action('MatchController@index') }}">Matches</a>&nbsp;|&nbsp;
+                <a href="{{ action('TournamentController@index') }}">Tournaments</a>
+            </div>
             </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right" id="menu">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <h4>  
-                            <br>
-                                <li><a href="{{ url('/login') }}">Login</a></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                {{--<!-- Left Side Of Navbar -->--}}
+                {{--<ul class="nav navbar-nav">--}}
+                    {{--<li><a href="{{ url('/home') }}">Home</a></li>--}}
+                {{--</ul>--}}
 
-                                <li><a href="{{ url('/register') }}">Register</a></li>
-                                <br>
-                                <br>
-                            </h4>
-                            
-                        @else
-                            <li class="dropdown">
-                            <br>
-                             <h4>   
-                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                 </a>
-                              
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                    <li><a href="{{ url('/ChangeProfile') }}"><i class="fa fa-btn fa-sign-out"></i>Edit Profile</a></li>
-                                    <li><a href="{{ url('/ChangePassword') }}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>
-                                </ul>
-                                </h4>
-                            </li>
-                        @endif
-                    </ul>
-                        
-                 
-                </div>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                <li><a href="{{ url('/ChangeProfile') }}"><i class="fa fa-btn fa-sign-out"></i>Edit Profile</a></li>
+                                <li><a href="{{ url('/ChangePassword') }}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>
+                            </ul>
+                        </li>
+
+                    @endif
+                    <!-- <li> 
+                    {!! Form::label('date_created',Carbon\Carbon::today()->toDateString()) !!}
+                    </li> -->
+                </ul>
             </div>
-
         </div>
     </nav>
-
     <div class="container">
         @yield('content')
     </div>
-
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

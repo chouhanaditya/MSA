@@ -2,7 +2,8 @@
 @section('content')
 
 {!! Form::model($match,['method' => 'PATCH','route'=>['match.update',$match->id]]) !!}
-    <br>
+
+<br>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

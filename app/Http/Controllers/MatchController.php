@@ -306,7 +306,7 @@ class MatchController extends Controller
             $myplayers=Player::where([['team_id',$user_teamId],['player_eligibility_status','In']])->get();
 
         }
-
+        
         else
         {
             $user_teamname="";
