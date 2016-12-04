@@ -44,7 +44,7 @@ class MatchController extends Controller
 
         $user=User::where('id',$match->referee_id)->first();
         $referee_name=$user->name;
-
+        
         $field=Field::where('id',$match->field_id)->first();
         $field_name=$field->field_name;
 
@@ -120,6 +120,7 @@ class MatchController extends Controller
             $email=Auth::user()->email;
             $user = User::where('email', $email)->first();
             $username=$user->name;
+            $role=$user->role;
 
             if($username==$referee_name)
                 $Update_flag='true';
@@ -132,7 +133,7 @@ class MatchController extends Controller
                 $Update_flag='false';
         }
 
-       return view('match.show',compact('match','referee_name','tournament_name','field_name','Update_flag','players_names_team1','players_flag_team1','players_names_team2','players_flag_team2'));
+       return view('match.show',compact('match','referee_name','tournament_name','field_name','Update_flag','role','players_names_team1','players_flag_team1','players_names_team2','players_flag_team2'));
     }
 
     public function create()
@@ -276,13 +277,6 @@ class MatchController extends Controller
     {
         try {
 
-            $players=Player::where('match_id', $id)->lists('id');
-
-            //Deleting all players of that match.
-            foreach ($players as $player)
-            {
-                Player::find($player)->delete();
-            }
             //Deleting that match.
             Match::find($id)->delete();
             return redirect('match');

@@ -5,6 +5,14 @@
     <a href="{{route('match.edit',$match->id)}}" class="btn btn-success" style="text-align: right";>Update Details</a>
     @endif
 
+    @if ((Auth::check())&&($role=='Official'))
+     
+        {!! Form::open(['method' => 'DELETE', 'route'=>['match.destroy', $match->id]]) !!}
+        <input type="submit" value="Delete this Match" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this match?')">
+        {!! Form::close() !!}
+                
+    @endif
+
     <div align="center">
     <h3> <?php echo ($tournament_name); ?></h3>
     
