@@ -2,10 +2,11 @@
 @section('content')
     <div align="center">
         <h3><?php echo ($field['field_name']); ?> Details </h3>
-        </div>
-	<br>
+    </div>
+        <h4><marquee>It is going to be sunny today in city!</marquee> </h4>	
+    <br>
+    
 	<div class="container">	
-
 
         <table class="table table-striped table-bordered table-hover">
 			<tbody>

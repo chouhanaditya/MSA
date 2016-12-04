@@ -21,21 +21,21 @@
                         
                         <article class="col-lg-4" style="max-width: 450px;">
                             <header>
-                                <h3>WHAT IS MSA?</h3>
+                                <h4>WHAT IS MSA?</h4>
                             </header>
                             <p>The Missouri Soccer Association is a soccer organization and our goal is to coordinate the school soccer meets and tournaments in the state of Missouri.</p>
                         </article>
 
                         <article class="col-lg-4" style="max-width: 450px;">
                             <header>
-                                <h3>WHO IS USING MSA?</h3>
+                                <h4>WHO IS USING MSA?</h4>
                             </header>
                             <p>Currently around 100+ schools of Missouri are associated with us. We have conducted various tournaments successfully.</p>
                         </article>
 
                         <article class="col-lg-4" style="max-width: 450px;">
                             <header>
-                                <h3>CONTACT US</h3>
+                                <h4>CONTACT US</h4>
                             </header>
                             <p><b>Phone numbers:</b>    (402)913-1111, (402)913-1112
                                 <br>
