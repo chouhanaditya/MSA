@@ -8,9 +8,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit Profile</div>
+                <div class="panel-heading">Edit Profile aaaa </div>
                 <div class="panel-body">
                     
+                    <div class="col-md-6">
+                            <br>{!! Form::label('email', 'Email:*') !!}
+                            <input id="email" class="form-control" name="email" value= {{<$user->email }} readonly="true">
+                    </div>
+                  
                    <div class="col-md-6">
                             <br>{!! Form::label('name', 'Name:*') !!}
                             {!! Form::text('name',null,['class'=>'form-control']) !!}
@@ -23,10 +28,6 @@
                     <div class="col-md-6">
                             <br>{!! Form::label('city', 'City:*') !!}
                             {!! Form::text('city',null,['class'=>'form-control']) !!}
-                    </div>
-                    <div class="col-md-6">
-                            <br>{!! Form::label('state', 'State:*') !!}
-                            {!! Form::text('state',null,['class'=>'form-control']) !!}
                     </div>
                     <div class="col-md-6">
                             <br>{!! Form::label('zipcode', 'Zipcode:*') !!}

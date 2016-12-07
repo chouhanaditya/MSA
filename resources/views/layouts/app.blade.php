@@ -95,12 +95,11 @@
                             <h4>  
                             <br>
                                 <li><a href="{{ url('/login') }}">Login</a></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
                                 <li><a href="{{ url('/register') }}">Register</a></li>
                                 <br>
                                 <br>
                             </h4>
-                            
+
                         @else
                             <li class="dropdown">
                             <br>
@@ -112,7 +111,6 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                                     <li><a href="{{ url('/ChangeProfile') }}"><i class="fa fa-btn fa-sign-out"></i>Edit Profile</a></li>
-                                    <li><a href="{{ url('/ChangePassword') }}"><i class="fa fa-btn fa-sign-out"></i>Change Password</a></li>
                                 </ul>
                                 </h4>
                             </li>

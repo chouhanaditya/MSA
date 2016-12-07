@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::auth();
+
 Route::post('/SecurityQuestions', 'Auth\PasswordController@getSecurityQuestions');
 
 Route::get('/match/teamSelection', 'MatchController@getTeamSelection');
@@ -23,13 +24,16 @@ Route::get('/match/teamSelection', 'MatchController@getTeamSelection');
 Route::post('/match/teamSelected', 'MatchController@postTeamSelection');
 
 Route::post('/ResetPassword', 'Auth\PasswordController@resetpassword');
+
 Route::post('/PasswordChanged', 'Auth\PasswordController@changepassword');
 
-Route::get('/ChangeProfile', 'Auth\PasswordController@getChangeProfile');
+Route::get('/ChangeProfile', 'ProfileController@getChangeProfile');
 
-Route::post('/ProfileChanged', 'Auth\PasswordController@postChangeProfile');
+Route::post('/ChangeProfile', 'ProfileController@postChangeProfile');
 
-Route::get('/ChangePassword', 'Auth\PasswordController@passwordChange');
+Route::get('/ChangePassword', 'ProfileController@getPasswordChange');
+
+Route::post('/ChangePassword', 'ProfileController@postPasswordChange');
 
 Route::resource('team','TeamController');
 Route::resource('school','SchoolController');
