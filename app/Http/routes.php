@@ -31,9 +31,6 @@ Route::get('/ChangeProfile', 'ProfileController@getChangeProfile');
 
 Route::post('/ChangeProfile', 'ProfileController@postChangeProfile');
 
-Route::get('/ChangePassword', 'ProfileController@getPasswordChange');
-
-Route::post('/ChangePassword', 'ProfileController@postPasswordChange');
 
 Route::resource('team','TeamController');
 Route::resource('school','SchoolController');
