@@ -101,9 +101,15 @@
                             </h4>
 
                         @else
-                            <li class="dropdown">
+
                             <br>
-                             <h4>   
+                            <h4>
+                             <a href="">
+                                         Role: {{ Auth::user()->role }}
+                             </a>
+                            <br>
+                            <br>   
+                                                        <li class="dropdown"> 
                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->name }} <span class="caret"></span>
                                  </a>
@@ -114,6 +120,7 @@
                                 </ul>
                                 </h4>
                             </li>
+
                         @endif
                     </ul>
                         
@@ -124,7 +131,7 @@
         </div>
     </nav>
 
-    <div class="container" >
+    <div class="container" style="background-color: #F0FFFF">
         @yield('content')
     </div>
 
