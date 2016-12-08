@@ -11,6 +11,8 @@ use App\User;
 use Auth;
 use App\Team;
 use App\Match;
+use Datetime;
+use Carbon\Carbon;
 
 class TournamentController extends Controller
 {
@@ -48,7 +50,9 @@ class TournamentController extends Controller
         $team_names=str_replace(['['], '', $team_names);
         $team_names=str_replace(['"'], '', $team_names);  
 
-        return view('tournament.show',compact('tournament','team_names'));
+        $Tournament_matches=Match::where([['match_date','<',Carbon::today()->format('Y-m-d')],['tournament_id',$id]])->orderBy('match_date','desc')->get();
+
+        return view('tournament.show',compact('tournament','team_names','Tournament_matches'));
     }
     public function create()
     {

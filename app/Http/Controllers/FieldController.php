@@ -8,9 +8,11 @@ use App\User;
 use App\Field;
 use Auth;
 use App\Team;
-use App\Match;
 use App\Player;
 use App\Http\Requests;
+use App\Match;
+use Datetime;
+use Carbon\Carbon;
 
 class FieldController extends Controller
 {
@@ -37,7 +39,10 @@ class FieldController extends Controller
     public function show($id)
     {
         $field = Field::findOrFail($id);
-        return view('field.show',compact('field'));
+
+        $Tournament_matches=Match::where([['match_date','<',Carbon::today()->format('Y-m-d')],['field_id',$id]])->orderBy('match_date','desc')->get();
+
+        return view('field.show',compact('field','Tournament_matches'));
     }
 
     public function create()

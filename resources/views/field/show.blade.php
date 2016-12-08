@@ -50,6 +50,17 @@
                 <td>Field Notes</td>
                 <td><?php echo ($field['field_notes']); ?></td>
             </tr>
+            <tr>
+                <td>Matches Played</td>
+                <td>
+                   @foreach ($Tournament_matches as $match)
+                                <div>
+                                    <a href="{{url('match',$match->id)}}" > Team {{ $match->match_team1_id }} vs Team {{ $match->match_team2_id }}</a>
+                                </div>
+                             @endforeach
+                </td>
+            </tr>
+
             </tbody>
         </table>
     </div>
